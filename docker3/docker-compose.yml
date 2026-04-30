@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: mydocker/nginx-custom
+    ports:
+      - "80:80"
+    volumes:
+      - /var/opt/nginx:/usr/share/nginx/html
+

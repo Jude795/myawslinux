@@ -1,0 +1,85 @@
+Started by user admin
+Checking out git git@github.com:Jude795/myawslinux.git into /var/lib/jenkins/workspace/CICDWEBPAGEAUTOMATION@script/19fda47db0b79600a052de2a231fd78bed52aeb82e6b32529d04c372492e36ce to read Jenkinsfile
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential version1
+Cloning the remote Git repository
+Cloning repository git@github.com:Jude795/myawslinux.git
+ > git init /var/lib/jenkins/workspace/CICDWEBPAGEAUTOMATION@script/19fda47db0b79600a052de2a231fd78bed52aeb82e6b32529d04c372492e36ce # timeout=10
+Fetching upstream changes from git@github.com:Jude795/myawslinux.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_SSH to set credentials jenkinskey
+Verifying host key using known hosts file
+ > git fetch --tags --force --progress -- git@github.com:Jude795/myawslinux.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@github.com:Jude795/myawslinux.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b796215f68215d2ef2f4d8f385f35e3e33642bf1 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b796215f68215d2ef2f4d8f385f35e3e33642bf1 # timeout=10
+Commit message: "Testing Jenkins Autobuild"
+First time build. Skipping changelog.
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/CICDWEBPAGEAUTOMATION
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential version1
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/CICDWEBPAGEAUTOMATION/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:Jude795/myawslinux.git # timeout=10
+Fetching upstream changes from git@github.com:Jude795/myawslinux.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_SSH to set credentials jenkinskey
+Verifying host key using known hosts file
+ > git fetch --tags --force --progress -- git@github.com:Jude795/myawslinux.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b796215f68215d2ef2f4d8f385f35e3e33642bf1 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b796215f68215d2ef2f4d8f385f35e3e33642bf1 # timeout=10
+Commit message: "Testing Jenkins Autobuild"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ docker build -t cicdwebpage:v1 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   1.54MB
+Step 1/2 : FROM nginx:latest
+ ---> 608a100c7165
+Step 2/2 : COPY index.html /usr/share/nginx/html/index.html
+ ---> 88056f0c79bc
+Successfully built 88056f0c79bc
+Successfully tagged cicdwebpage:v1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Container)
+[Pipeline] sh
++ docker stop webpage
+webpage
++ docker rm webpage
+webpage
++ docker run -d --name webpage -p 80:80 cicdwebpage:v1
+e307de6c6a74031141ac6c7c8c01642507d5daccaef21768fb613814dfc3fefe
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

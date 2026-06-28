@@ -1,0 +1,23 @@
+# Sample configuration.
+# See https://prometheus.io/docs/alerting/configuration/ for documentation.
+
+global:
+  # The smarthost and SMTP sender used for mail notificati
+  # The smarthost and SMTP sender used for mail notifications.
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'saviojude0@gmail.com'
+  smtp_auth_username: 'saviojude0@gmail.com'
+  smtp_auth_password: 'ljqw qtzc bttg qmgs'
+route:
+  receiver: 'gmail-notifications'
+receivers:
+  - name: 'gmail-notifications'
+    email_configs:
+      - to: 'saviojude0@gmail.com'
+        from: 'saviojude0@gmail.com'
+        smarthost: 'smtp.gmail.com:587'
+        auth_username: 'saviojude0@gmail.com'
+        auth_identity: 'saviojude0@gmail.com'
+        auth_password: 'ljqw qtzc bttg qmgs'
+        require_tls: true
+
